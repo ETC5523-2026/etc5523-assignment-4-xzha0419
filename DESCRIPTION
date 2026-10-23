@@ -1,0 +1,13 @@
+Package: australianrent
+Title: Check Rental Affordability in VIC
+Version: 0.0.0.9000
+Authors@R: 
+    person("Xuanning", "Zhang", , "xzha0419@student.monash.edu", role = c("aut", "cre"))
+Description: Quarterly median rents by Victorian local government area from
+    1999 to 2025, with tools to evaluate whether a household can afford to
+    rent on a given income, and a Shiny application for exploring which
+    areas are affordable.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.1.1
