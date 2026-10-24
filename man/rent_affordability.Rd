@@ -18,9 +18,9 @@ rent_affordability(
 
 \item{property_type}{One of the property type from \code{vic_rents$property_type}.}
 
-\item{quarter}{Selected quarter to access data, default with most recent data.}
+\item{threshold}{Share of income which rent is treated as un affordable. Default with 0.3 align with Australian housing stress benchmark.}
 
-\item{treshold}{Share of income which rent is treated as un affordable. Default with 0.3 align with Australian housing stress benchmark.}
+\item{quarter}{Selected quarter to access data, default with most recent data.}
 }
 \value{
 A data frame with one row per LGA, the median rent, and share of income with corresponding rent, and whether if falls against the threshold.

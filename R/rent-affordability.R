@@ -3,7 +3,7 @@
 #'and highlight the areas wheres rent has lower than given share of income
 #'@param weekly_income The gross income of household per week is AUS dollars.
 #'@param property_type One of the property type from `vic_rents$property_type`.
-#'@param treshold Share of income which rent is treated as un affordable. Default with 0.3 align with Australian housing stress benchmark.
+#'@param threshold Share of income which rent is treated as un affordable. Default with 0.3 align with Australian housing stress benchmark.
 #'@param quarter Selected quarter to access data, default with most recent data.
 #'@return A data frame with one row per LGA, the median rent, and share of income with corresponding rent, and whether if falls against the threshold.
 #'@details Area where Home Victoria suppressed the median are returned with NA due to too few trades.
@@ -25,7 +25,7 @@ if(is.null(quarter)){
   quarter <- max(rents$quarter[!is.na(rents$Median)])
 }
 rents |>
-  filter(
+  dplyr::filter(
     .data$property_type == .env$property_type,
     .data$quarter == .env$quarter
   ) |>

@@ -15,4 +15,7 @@ Depends:
 LazyData: true
 Config/roxygen2/version: 8.1.1
 Imports: 
-    rlang
+    dplyr,
+    ggplot2,
+    rlang,
+    shiny
