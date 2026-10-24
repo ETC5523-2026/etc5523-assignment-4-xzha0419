@@ -65,4 +65,37 @@ binded_sheet <- dplyr::bind_rows(rent_info, .id = "property_type") |>
 dplyr::filter(!is.na(lga),
               !lga %in% c("Group Total", "Victoria", "Metro", "Non-Metro")
               ) |>
-  dplyr::mutate(across(-(1:3), ~ as.numeric(dplyr::na_if(.x, "-"))))
+  dplyr::mutate(across(-(1:3), ~ as.numeric(dplyr::na_if(.x, "-")))) |>
+  tidyr::pivot_longer(
+    cols = -(1:3),
+    names_to = c("quarter_label", "measure"),
+    names_sep = "_",
+    values_to = "value"
+  ) |> tidyr::pivot_wider(
+    names_from = "measure",
+    values_from = "value"
+  ) |>
+  dplyr::mutate(
+  month = substr(quarter_label, 1, 3),
+  year = substr(quarter_label, 5, 8),
+  month_num = dplyr::case_when(
+    month == "Mar" ~ "03",
+    month == "Jun" ~ "06",
+    month == "Sep" ~ "09",
+    month == "Dec" ~ "12"
+  ),
+  quarter = as.Date(paste0(year, "-", month_num, "-01")),
+  property_type = dplyr::case_when(
+    property_type == "1br flat"       ~ "1 bedroom flat",
+    property_type == "2br Flat"       ~ "2 bedroom flat",
+    property_type == "3br Flat"       ~ "3 bedroom flat",
+    property_type == "2br House"      ~ "2 bedroom house",
+    property_type == "3br House"      ~ "3 bedroom house",
+    property_type == "4br House"      ~ "4 bedroom house",
+    property_type == "All Properties" ~ "All properties"
+  )
+  ) |>
+  dplyr::select(quarter, property_type, lga, region, Median, Count)
+vic_rents <- binded_sheet
+
+usethis::use_data(vic_rents, overwrite = TRUE)
