@@ -18,12 +18,12 @@ over time.
 ## Data
 
 `vic_rents` includes quarterly median advertised rents from June 1999 to
-September 2025 by property type. The data has 58618 rows covering 79
+September 2025 by property type. The data has 58,618 rows covering 79
 local government areas, 7 property types and 106 quarters.
 
-*Cautions* - Median number only incude the new rent contract but not the
-whole market. - Home Victoria will turn the median price to NA if this
-quarter has too few trade records.
+*Cautions* - Median number only include the newly signed leases but not
+the whole market. - Homes Victoria will replace the median price to NA
+if this quarter has too few lettings.
 
 Source: Homes Victoria, *Rental Report — Quarterly: Quarterly Median
 Rents by LGA*, September quarter 2025, published on
@@ -35,7 +35,7 @@ The script that downloads and reshapes the source workbook is in
 
 ## Installation
 
-Install the development version form GitHub:
+Install the development version from GitHub:
 
 ``` r
 #need to install "remotes" package first
@@ -49,13 +49,13 @@ library(australianrent)
 run_app()
 ```
 
-The app reads the data installed with the package which fo not need
-internet connection and external files.
+The app reads the data installed with the package, so internet
+connection and external files are not needed.
 
 ## Example
 
 Search the areas where the median rent for a one-bedroom flat is within
-40% if a gross weekly household income of \$1000.
+40% of a gross weekly household income of \$1000.
 
 ``` r
 library(australianrent)
@@ -78,7 +78,7 @@ head(result)
 #> 6 Barwon South West Queenscliffe 2025-09-01     NA    NA        NA    NA
 ```
 
-The weekly tental budget is \$400.
+The weekly rental budget is \$400.
 
 - `Median` is the median weekly rent in Australian dollars.
 
@@ -87,3 +87,20 @@ The weekly tental budget is \$400.
 - `affordable` is `TRUE` when the median rent is within the budget.
 
 - `NA` indicates unavailable data.
+
+## What’s in the package
+
+| Component | Purpose |
+|----|----|
+| `vic_rents` | Quarterly median rents by local government area, 1999 to 2025 |
+| `rent_affordability()` | Compare every area’s median rent against a given income |
+| `run_app()` | Launch the Shiny app |
+
+## Generative AI declaration
+
+ChatGPT and Shiny Assistant have been used in this package to understand
+the unfamiliar code, to structure the approach to the data preparation
+and package layout, to learn how Shiny works (particularly reactive
+expressions and input validation), to debug errors and check whether the
+package ran correctly. *All output by AI has been reviewed by myself
+before publish*.
